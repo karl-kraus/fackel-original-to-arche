@@ -1,0 +1,9 @@
+@prefix acdh: <https://vocabs.acdh.oeaw.ac.at/schema#>.
+@prefix acdhi: <https://id.acdh.oeaw.ac.at/>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+	
+<https://id.acdh.oeaw.ac.at/fackel-original>  a  acdh:TopCollection ;
+	 acdh:hasTitle "Fackel Original XML Dateien"@de;

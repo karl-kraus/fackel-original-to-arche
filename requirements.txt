@@ -1,0 +1,3 @@
+acdh-tei-pyutils
+pandas
+rdflib
