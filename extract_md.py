@@ -34,6 +34,7 @@ for x in tqdm(files, total=len(files)):
     item["issue_title"] = " ".join([x[1] for x in issue.items()[:3]])
     item["page_title"] = page_title.text
     item["page_date"] = page_date
+    item["word_count"] = len(doc.any_xpath('.//w'))
     data.append(item)
 print(len(data))
 
