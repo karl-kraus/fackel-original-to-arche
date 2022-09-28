@@ -1,0 +1,33 @@
+name: ARCHE-Ingest
+
+on:
+  workflow_dispatch
+
+jobs:
+  build_pages:
+    name: Ingest Data into ARCHE
+    runs-on: ubuntu-latest
+    env:
+      GITLAB_TOKEN: ${{secrets.GITLAB_TOKEN}}
+      TESTENV: HANSI4EVER
+    steps:
+    - name: Perform Checkout
+      uses: actions/checkout@v2
+    - name: Install python things
+      run: |
+        pip install -r requirements.txt
+    - name: fetch data
+      run: |
+        ./fetch_data.sh
+    - name: extract md
+      run: |
+        python extract_md.py
+    - name: create arche md
+      run: |
+        python create_arche_md.py
+    - name: ingestion dependencies
+      run: |
+        composer require "acdh-oeaw/arche-ingest:^1"
+    - name: ingest ARCHE-CONSTANTS
+      run: |
+        vendor/bin/arche-import-metadata out/arche.ttl https://arche-dev.acdh-dev.oeaw.ac.at/api ${{secrets.ARCHE_LOGIN}} ${{secrets.ARCHE_PASSWORD}} --retriesOnConflict 25
