@@ -105,34 +105,34 @@ for i, df in master_df.groupby("nr"):
                 )
             )
 # constants
-            g.add(
-                (
-                    item_id,
-                    ACDHNS.hasMetadataCreator,
-                    URIRef("https://id.acdh.oeaw.ac.at/acdh"),
-                )
+        g.add(
+            (
+                item_id,
+                ACDHNS.hasMetadataCreator,
+                URIRef("https://id.acdh.oeaw.ac.at/acdh"),
             )
-            g.add((item_id, ACDHNS.hasActor, URIRef('https://id.acdh.oeaw.ac.at/kkraus')))
-            g.add((item_id, ACDHNS.hasOwner, URIRef("https://id.acdh.oeaw.ac.at/acdh")))
-            g.add(
-                (item_id, ACDHNS.hasRightsHolder, URIRef("https://id.acdh.oeaw.ac.at/oeaw"))
+        )
+        g.add((item_id, ACDHNS.hasActor, URIRef('https://id.acdh.oeaw.ac.at/kkraus')))
+        g.add((item_id, ACDHNS.hasOwner, URIRef("https://id.acdh.oeaw.ac.at/acdh")))
+        g.add(
+            (item_id, ACDHNS.hasRightsHolder, URIRef("https://id.acdh.oeaw.ac.at/oeaw"))
+        )
+        g.add((item_id, ACDHNS.hasLicensor, URIRef("https://id.acdh.oeaw.ac.at/acdh")))
+        g.add(
+            (
+                item_id,
+                ACDHNS.hasLicense,
+                URIRef("https://vocabs.acdh.oeaw.ac.at/archelicenses/cc-by-4-0"),
             )
-            g.add((item_id, ACDHNS.hasLicensor, URIRef("https://id.acdh.oeaw.ac.at/acdh")))
-            g.add(
-                (
-                    item_id,
-                    ACDHNS.hasLicense,
-                    URIRef("https://vocabs.acdh.oeaw.ac.at/archelicenses/cc-by-4-0"),
-                )
+        )
+        g.add((item_id, ACDHNS.hasDepositor, URIRef("https://id.acdh.oeaw.ac.at/acdh")))
+        g.add(
+            (
+                item_id,
+                ACDHNS.hasLanguage,
+                URIRef("https://vocabs.acdh.oeaw.ac.at/iso6393/deu"),
             )
-            g.add((item_id, ACDHNS.hasDepositor, URIRef("https://id.acdh.oeaw.ac.at/acdh")))
-            g.add(
-                (
-                    item_id,
-                    ACDHNS.hasLanguage,
-                    URIRef("https://vocabs.acdh.oeaw.ac.at/iso6393/deu"),
-                )
-            )
+        )
 
 
 os.makedirs(OUT_DIR, exist_ok=True)
