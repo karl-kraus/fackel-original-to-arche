@@ -1,13 +1,23 @@
 import os
 import pandas as pd
-from rdflib import Graph, URIRef, Literal, BNode, Namespace, XSD
-from rdflib.namespace import FOAF, RDF, RDFS
-from config import MASTER_DF, ARCHE_BASE_ID, ARCHE_MD, OUT_DIR
+from rdflib import Graph, URIRef, Literal, Namespace, XSD
+from rdflib.namespace import RDF
+from config import MASTER_DF, ARCHE_BASE_ID, ARCHE_MD, OUT_DIR, ARCHE_CONSTANTS
+
+if os.environ.get('TESTENV'):
+    test_env = True
+else:
+    test_env = False
 
 master_df = pd.read_csv(MASTER_DF)
 ACDHNS = Namespace("https://vocabs.acdh.oeaw.ac.at/schema#")
 
 g = Graph()
+g.parse(ARCHE_CONSTANTS)
+
+if test_env:
+    master_df = master_df.head(100)
+
 for i, df in master_df.groupby("nr"):
     nr_col_id = URIRef(f"{ARCHE_BASE_ID}/issue-{i}")
     g.add((nr_col_id, RDF.type, ACDHNS.Collection))
@@ -20,21 +30,21 @@ for i, df in master_df.groupby("nr"):
     )
     g.add((nr_col_id, ACDHNS.hasExtent, Literal(f"{len(df)} Seiten", lang="de")))
     g.add((nr_col_id, ACDHNS.isPartOf, URIRef(ARCHE_BASE_ID)))
-    if len(df.iloc[0]["page_date"]) == 10:
-        g.add(
-            (
-                nr_col_id,
-                ACDHNS.hasCreatedStartDateOriginal,
-                Literal(f"{df.iloc[0]['page_date']}", datatype=XSD.date),
-            )
-        )
-        g.add(
-            (
-                nr_col_id,
-                ACDHNS.hasCreatedEndDateOriginal,
-                Literal(f"{df.iloc[0]['page_date']}", datatype=XSD.date),
-            )
-        )
+    # if len(df.iloc[0]["page_date"]) == 10:
+    #     g.add(
+    #         (
+    #             nr_col_id,
+    #             ACDHNS.hasCreatedStartDateOriginal,
+    #             Literal(f"{df.iloc[0]['page_date']}", datatype=XSD.date),
+    #         )
+    #     )
+    #     g.add(
+    #         (
+    #             nr_col_id,
+    #             ACDHNS.hasCreatedEndDateOriginal,
+    #             Literal(f"{df.iloc[0]['page_date']}", datatype=XSD.date),
+    #         )
+    #     )
     ## constants
     g.add(
         (
@@ -63,6 +73,7 @@ for i, df in master_df.groupby("nr"):
             URIRef("https://vocabs.acdh.oeaw.ac.at/iso6393/deu"),
         )
     )
+    
 
 os.makedirs(OUT_DIR, exist_ok=True)
 g.serialize(destination=ARCHE_MD)

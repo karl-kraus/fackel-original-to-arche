@@ -1,6 +1,6 @@
 @prefix acdh: <https://vocabs.acdh.oeaw.ac.at/schema#>.
 	
-<https://id.acdh.oeaw.ac.at/fackel-original>  a  acdh:TopCollection ;
+<https://id.acdh.oeaw.ac.at/fackel-original-data>  a  acdh:TopCollection ;
 	acdh:hasTitle "Fackel Original XML Dateien"@de;
 	acdh:hasDescription "Original XML Dateien der Fackel"@de;
 	acdh:hasContact <https://id.acdh.oeaw.ac.at/acdh>;
@@ -9,4 +9,7 @@
 	acdh:hasLicense <https://vocabs.acdh.oeaw.ac.at/archelicenses/cc-by-4-0>;
 	acdh:hasRightsHolder <https://id.acdh.oeaw.ac.at/oeaw>;
 	acdh:hasDepositor <https://id.acdh.oeaw.ac.at/acdh>;
-	acdh:hasLanguage <https://vocabs.acdh.oeaw.ac.at/iso6393/deu>
+	acdh:hasMetadataCreator <https://id.acdh.oeaw.ac.at/acdh>;
+	acdh:hasCurator <https://id.acdh.oeaw.ac.at/acdh>;
+	acdh:hasSubject "Die Fackel"@de;
+	acdh:hasLanguage <https://vocabs.acdh.oeaw.ac.at/iso6393/deu> .
