@@ -39,7 +39,10 @@ for x in tqdm(files, total=len(files)):
     item["page_title"] = page_title.text
     item["page_date"] = fix_date(page_date)
     item["word_count"] = len(doc.any_xpath(".//w"))
+    # item["page_nr"] = doc.any_xpath('data(./@n')[0] # this line causes OOM !
+    item["page_nr"] = doc.tree.getroot().attrib["n"]
     data.append(item)
+    del doc
 print(len(data))
 
 df = pd.DataFrame(data)
