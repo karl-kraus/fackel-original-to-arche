@@ -76,7 +76,7 @@ for i, df in master_df.groupby("nr"):
                 item_id,
                 ACDHNS.hasTitle,
                 Literal(
-                    f"Die Fackel - {df.iloc[0]['issue_title']}, Seite {i + 1}", lang="de"
+                    f"Die Fackel - {df.iloc[0]['issue_title']}, Seite {row['page_nr']}", lang="de"
                 ),
             )
         )
